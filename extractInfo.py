@@ -33,25 +33,29 @@ def main():
    
     global SentenceCount
     global WordCount
+
     # Update the next line based on the file that contains the links to articles.
-    df = pd.read_csv("medical_links_containing_links.csv")
-    for i in range(len(df)):
-        print(i)
+    df = pd.read_csv("links.csv")
+
+    for i in range(5):
+        
         try:
-            t = extract(df["Link"][i])
+            t = extract("https://te.wikipedia.org"+str(df["Urls"][i]))
         except:
             continue
+
         # Can also update the output path if needed.
-        string  = "./MedicalTask/%s.txt" % i
+        string  = "./%s.txt" % i
         WordCount += len(t.split(" "))
         t = sent_tokenize(t)
         SentenceCount += len(t)
+
         try:
             with open(string, "w") as f:
-                f.write(df["Title"][i])
+                f.write(df["titles"][i])
                 f.write("\n")
                 f.write("\n")
-                f.write(df["Link"][i])
+                f.write(df["Urls"][i])
                 f.write("\n")
                 f.write("\n")
                 for line in t:
