@@ -24,6 +24,7 @@ def extract_interwikilinks(url):
 
     links = soup.find_all("a", href = True)
 
+    # Update the list accordingly after changing language
     remlist = ["మూలాల","v","t"]
 
     for link in links:

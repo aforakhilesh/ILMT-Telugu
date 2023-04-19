@@ -37,8 +37,10 @@ def main():
     # Update the next line based on the file that contains the links to articles.
     df = pd.read_csv("links.csv")
 
-    for i in range(5):
+    # Change the number of files by changing the value in range(), keeping len(df) runs for all links, range(n) runs for "n" links.
+    for i in range(len(df)):
         
+        # change "te" to other language tags if needed, (like "hi","ur","bn")..
         try:
             t = extract("https://te.wikipedia.org"+str(df["Urls"][i]))
         except:
