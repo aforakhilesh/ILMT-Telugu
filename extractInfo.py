@@ -49,29 +49,33 @@ def main():
         # Can also update the output path if needed.
         string  = "./%s.txt" % i
         WordCount += len(t.split(" "))
-        t1 = sent_tokenize(t)
-        SentenceCount += len(t1)
-        
+
         # Check for keywords in the extracted text.
         keywords = ["స్వాతంత్ర్యం","పాకిస్తాన్","హిందూస్తాన్","1947"]
         words = t.split(" ")
         for word in words:
             if word in keywords:
-                try:
-                    with open(string, "w") as f:
-                        f.write(df["titles"][i])
+                flag = True
+                continue
+            
+        t = sent_tokenize(t)
+        SentenceCount += len(t)
+        
+        if flag:
+            try:
+                with open(string, "w") as f:
+                    f.write(df["titles"][i])
+                    f.write("\n")
+                    f.write("\n")
+                    f.write(df["Urls"][i])
+                    f.write("\n")
+                    f.write("\n")
+                    for line in t:
+                        f.write(line)
                         f.write("\n")
-                        f.write("\n")
-                        f.write(df["Urls"][i])
-                        f.write("\n")
-                        f.write("\n")
-                        for line in t:
-                            f.write(line)
-                            f.write("\n")
-                        f.close()
-                except:
-                    pass
-
+                    f.close()
+            except:
+                pass
 
 if __name__ == '__main__':
     main()
